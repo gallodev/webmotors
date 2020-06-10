@@ -1,0 +1,84 @@
+.home-link{
+    margin: 10px 0 0 10px;    
+}
+
+.main-header{
+    display: flex;
+    flex: 1;    
+    height: 100px;
+}
+.main-container .search-container{
+    flex: 1;
+    align-content: center;
+    align-items: center;
+}
+.main-container .search-container .box-search{
+    margin: 0 auto;    
+}
+.main-container .search-container  .box-search-header{
+    width: 100%;
+}
+.main-container .search-container  .box-search-header .tab{
+    width: 155px;
+    height: 55px;
+    position: relative;
+}
+.main-container .search-container  .box-search-header .tab-link{
+    width: 100%;    
+    height: 100%;
+    color: #B7B7B7;
+    position: absolute;
+}
+.main-container .search-container  .box-search-header .tab.active strong{
+    color: #F51344;
+}
+.main-container .search-container  .box-search-header .tab.active .tab-icon{
+    color: #F51344;
+}
+
+.main-container .search-container  .box-search-header .tab.active:after{
+    content: "";
+    border: 1px solid #F51344;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+}
+.main-container .search-container  .box-search-header .tab .tab-text{
+    float: right;
+    width: 70%;
+    text-align: left;
+}
+.main-container .search-container  .box-search-header .tab strong,span{
+    text-transform: uppercase;
+}
+
+.main-container .search-container  .box-search-header .tab-icon{
+    color: #B7B7B7;
+    margin-top: 5px;
+    float: left;
+}
+.main-container .search-container .box-search-header .tab:first-child{
+    margin-right: 15px;
+}
+.main-container .search-container .box-search-content{
+    background: #FFFFFF;
+    width: 933px;
+    height: 312px;        
+}
+
+.main-container .search-container .box-search-header .container-sell-car{    
+    border: 1px solid #f49a13;
+    width: 170px;    
+    position:relative;
+    height: 50px;
+    line-height: 50px;
+}
+.main-container .search-container .box-search-header .container-sell-car a{
+    color: #f49a13;
+    font-size: 15px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
