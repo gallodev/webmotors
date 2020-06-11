@@ -57,38 +57,54 @@ select{
     margin-bottom: 40px;
 }
 .col-xs-1{
+    float:left;
     width: 8.333333%;
 }
 .col-xs-2{
+    float:left;
     width: 16.666667%;
 }
 .col-xs-3{
+    float:left;
     width: 26%;
 }
 .col-xs-4{
+    float:left;
     width: 33.333333%;
 }
 .col-xs-5{
-    width: 42.666667%;
+    float:left;
+    width: 47.333333%;
+}
+.col-xs-5-min{
+    float:left;
+    width: 44.999999%;
 }
 .col-xs-6{
+    float:left;
     width: 50%;
 }
 .col-xs-7{
+    float:left;
     width: 58.333333%;
 }
 .col-xs-8{
+    float:left;
     width: 66.666667%;
 }
 .col-xs-9{
+    float:left;
     width: 75%;
 }
 .col-xs-10{
+    float:left;
     width: 83.333333%;
 }
 .col-xs-11{
-    width: 91.666667%;
+    float:left;
+    width: 94.999999%
 }
 .col-xs-12{
+    float:left;
     width: 100%;
 }
