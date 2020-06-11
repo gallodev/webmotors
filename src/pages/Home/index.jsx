@@ -29,7 +29,7 @@ const Home = ({activeTab}) => {
             <section className="search-container flex">
                 <div className="box-search">
                     <Tabs/>
-                    <div className="box-search-content left clearfix">    
+                    <div className="box-search-content left row">    
                         {content}
                     </div>
                 </div>

@@ -1,5 +1,14 @@
+:root {
+    --main-bg-color: #eaeaea;
+    --highlight-red-color: #f3123c;
+    --main-orange-color:#f49a13;
+    --main-gray-color: #E8E8E8;
+    --highlight-gray-color: #B7B7B7;
+    --main-white-color: #FFFFFF;
+}   
+
 body{    
-    background: #eaeaea;
+    background: var(--main-bg-color);
 }
 *{
     box-sizing: border-box;
@@ -21,8 +30,8 @@ input{
 select{    
     height: 35px;    
     background: white;
-    color: #B7B7B7;
-    border: 1px solid #DDD;
+    color: var(--highlight-gray-color);
+    border: 1px solid var(--main-gray-color);
     text-indent: 5px;    
 }
 .ml-20{
@@ -38,14 +47,15 @@ select{
 .right{
     float: right;
 }
-.clearfix{
+.row{    
     clear: both;
 }
-
 .mb-20{
     margin-bottom: 15px;
 }
-
+.mb-40{
+    margin-bottom: 40px;
+}
 .col-xs-1{
     width: 8.333333%;
 }
