@@ -53,13 +53,13 @@ export default function Search() {
                 </div>
                 <div className="row mb-40"/>
                 <div className="form-group col-xs-6">
-                    <a href="#a"> > Busca avançada </a>
+                    <a href="#advanced-search" className="advaned-search-link"> > Busca avançada </a>
                 </div>
-                <div className="form-group col-xs-6">
-                    <div className="left col-xs-4">
+                <div className="form-group col-xs-5 ml-20">
+                    <div className="left col-xs-3">
                         <ClearFilter/>
                     </div>
-                    <div className="left col-xs-8">
+                    <div className="left ml-20 col-xs-8-max">
                         <SearchButton/>
                     </div>
                 </div>                            

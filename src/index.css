@@ -90,7 +90,11 @@ select{
 }
 .col-xs-8{
     float:left;
-    width: 66.666667%;
+    width: 66.333333%
+}
+.col-xs-8-max{
+    float: left;
+    width: 68.333333%;
 }
 .col-xs-9{
     float:left;
