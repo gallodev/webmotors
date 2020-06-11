@@ -10,7 +10,9 @@ export default function Search() {
                 <li><Checkbox attr={{name:"new",label:"Novos"}} /></li>
                 <li><Checkbox attr={{name:"used",label:"Usados"}} /></li>                
                 <li className="clearfix mb-20"/>
-                <li className="left col-xs-3"><LocationInput/></li>
+                <li className="left col-xs-3">
+                    <LocationInput/>
+                </li>
                 <li className="left col-xs-2">
                     <SelectBox name="radius" label="Raio"/>
                 </li>
@@ -31,7 +33,7 @@ export default function Search() {
                     <SelectBox name="model" label="Versão" class="w-200"/>
                 </li>
                 <li className="clearfix mb-20"/>
-                
+
             </ul>
         </div>
     )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaLocationArrow , FaWindowClose } from "react-icons/fa";
 
 export default function LocationInput() {
     const location = "São Paulo - SP"
@@ -6,8 +7,8 @@ export default function LocationInput() {
     return (
         <div className="container-location-input">
             <input type="text" placeholder={"Onde : " + location}/>
-            <i className="location-ico"/>
-            <i className="remove-ico"/>
+            <FaLocationArrow size={25} className="location-ico"  />            
+            <FaWindowClose size={25} className="remove-ico"  />                        
         </div>
     )
 }

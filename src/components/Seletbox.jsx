@@ -1,5 +1,7 @@
 import React from 'react'
 import className from 'classnames';
+import { FaChevronDown } from "react-icons/fa";
+
 
 
 export default function Seletbox(props) {
@@ -15,6 +17,7 @@ export default function Seletbox(props) {
                         <option value="mercedes">Mercedes</option>
                         <option value="audi">Audi</option>
                     </select>                
+                    <FaChevronDown size={10} className="bottom-arrow-ico"  />            
                 </div>                
             </div>            
         </div>
