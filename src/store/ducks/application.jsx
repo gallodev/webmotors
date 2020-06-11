@@ -6,7 +6,11 @@ export const { Types , Creators } = createActions({
 });
 
 const INITIAL_STATE = Immutable({
-    activeTab : 1,    
+    activeTab : 1,   
+    tabs : {
+        carIndex : 1,
+        motorcycleIndex : 2
+    } 
 });
 
 const dispatchActiveTab = (state = INITIAL_STATE , action ) => {    

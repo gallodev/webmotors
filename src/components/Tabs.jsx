@@ -6,13 +6,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as applicationActions } from '../store/ducks/application';
 
-const Tabs = ({currentTab,dispatchActiveTab}) => {
-
-    
-    const carIndex = 1,
-          motorcycleIndex = 2;
-
-
+const Tabs = ({currentTab,tabs,dispatchActiveTab}) => {
+        
     function handleTabActive(e,currentActive){
         e.preventDefault();
         if(currentTab !== currentActive){            
@@ -23,8 +18,8 @@ const Tabs = ({currentTab,dispatchActiveTab}) => {
     return (
         <div className="box-search-header left">                            
             <ul>
-                <li className={classnames("tab left",(currentTab === carIndex)?"active":"")} index={carIndex} >
-                    <a href="#car" onClick={(e)=>handleTabActive(e,carIndex)} className="tab-link left">
+                <li className={classnames("tab left",(currentTab === tabs.carIndex)?"active":"")} >
+                    <a href="#car" onClick={(e)=>handleTabActive(e,tabs.carIndex)} className="tab-link left">
                         <FaCarAlt size={25} className="tab-icon" />
                         <div className="tab-text">
                             <span>Comprar</span>
@@ -32,8 +27,8 @@ const Tabs = ({currentTab,dispatchActiveTab}) => {
                         </div>
                     </a>
                 </li>
-                <li className={classnames("tab left",(currentTab === motorcycleIndex)?"active":"")} index={motorcycleIndex}>
-                    <a href="#motorcycle" onClick={(e)=>handleTabActive(e,motorcycleIndex)} className="tab-link left">
+                <li className={classnames("tab left",(currentTab === tabs.motorcycleIndex)?"active":"")} >
+                    <a href="#motorcycle" onClick={(e)=>handleTabActive(e,tabs.motorcycleIndex)} className="tab-link left">
                         <FaMotorcycle size={25} className="tab-icon" />
                         <div className="tab-text">
                             <span>Comprar</span>
@@ -50,7 +45,8 @@ const Tabs = ({currentTab,dispatchActiveTab}) => {
 }
 
 const mapStateToProps = (state) => ({        
-    currentTab : state.application.activeTab
+    currentTab : state.application.activeTab,
+    tabs : state.application.tabs
 });
 
 const mapDispatchToProps = dispatch => 
