@@ -213,7 +213,10 @@
 }
 
 
-@media screen and (min-width: 768px) and (max-width:933px) {    
+@media screen and (min-width: 768px) and (max-width:935px) {        
+    .main-container .main-results .box-result .box-vehicle{
+        margin: 20px 2%;        
+    }
     .main-container .search-container .box-search-content .search-content .container-location-input input{        
         border-right: 1px solid var(--main-gray-color);
     }
@@ -222,7 +225,7 @@
     }
     .main-container .search-container .box-search-content{
         width: 100%;
-        height: auto;
+        height: auto;        
     }
     
     .main-container .search-container .box-search-content .search-content .form-group{
@@ -239,10 +242,13 @@
     }
     .main-container .search-container .box-search-content .search-content .search-button{
         margin-top: 35px;
-    }
+    }    
 }
-  
+
 @media screen and (max-width: 768px) {    
+    .main-container .main-results .box-result .box-vehicle{
+        margin: 5px;
+    }
     .main-container .search-container .box-search-content .search-content .container-location-input input{
         border-right: 1px solid var(--main-gray-color);
     }
@@ -259,6 +265,7 @@
     .main-container .search-container .box-search-content{
         width: 100%;
         height: auto;
+        float: left;
     }
     .main-container .search-container .box-search-content .search-content .form-group{
         margin-left: 0;

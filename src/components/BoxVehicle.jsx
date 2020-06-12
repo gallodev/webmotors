@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 export default function BoxVehicle(props) {
     return (
@@ -21,10 +22,14 @@ export default function BoxVehicle(props) {
                     <div className="row"/>
                     <div>
                         <span className="left">{props.vehicle.YearModel} / {props.vehicle.YearFab}</span>
-                        <span className="right">{props.vehicle.Price}</span>
+                        <span className="right">R$: {props.vehicle.Price}</span>
                     </div>                
                 </div>
             </div>
         </div>
     )
 }
+
+BoxVehicle.propTypes = {
+    vehicle: PropTypes.object.isRequired
+};

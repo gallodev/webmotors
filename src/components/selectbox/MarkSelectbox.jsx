@@ -5,10 +5,14 @@ import { FaChevronDown } from "react-icons/fa";
 import { bindActionCreators } from 'redux';
 import { Creators as searchActions } from '../../store/ducks/search';
 import { Vehicles } from '../../services';
+import PropTypes from 'prop-types';
 
 const MarkSelectBox = ({
                     dispatchSelectMark,
-                    dispatchModel,                     
+                    dispatchModel,  
+                    dispatchSelectModel,
+                    dispatchVersion,
+                    dispatchSelectVersion,                   
                     props}) => {   
 
     const [currentValue,setCurrentValue] = useState("");            
@@ -20,13 +24,19 @@ const MarkSelectBox = ({
         e.preventDefault();
         const cur_value = parseInt(e.target.value);
         
-        if(loading !== true || cur_value != 0){                        
+        if(loading !== true || cur_value !== 0){                        
             dispatchSelectMark(cur_value);     
             //load models
             Vehicles.getModel(cur_value)
             .then(res=>{
                 dispatchModel(res);                                        
             });                                            
+        }
+
+        if(cur_value === 0){
+            dispatchSelectModel(0);
+            dispatchVersion([]);
+            dispatchSelectVersion(0);
         }
 
         //use to get formated value user friendly
@@ -82,3 +92,8 @@ const mapDispatchToProps = dispatch =>
 
 
 export default (connect(mapStateToProps,mapDispatchToProps))(MarkSelectBox);
+
+MarkSelectBox.propTypes = {
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,        
+};

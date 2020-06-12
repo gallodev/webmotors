@@ -5,6 +5,7 @@ import { FaChevronDown } from "react-icons/fa";
 import { bindActionCreators } from 'redux';
 import { Creators as searchActions } from '../../store/ducks/search';
 import { Vehicles } from '../../services';
+import PropTypes from 'prop-types';
 
 const ModelSelectbox = ({
                     SEARCH,
@@ -13,27 +14,27 @@ const ModelSelectbox = ({
                     props}) => {   
 
     const [currentValue,setCurrentValue] = useState("Selecione");            
-    const [options,setOptions] = useState([]);    
-    const [hasChange,setHasChange] = useState(false);
+    const [options,setOptions] = useState([]);        
     
                 
     function handleChange(e){ 
         e.preventDefault();
         const cur_value = parseInt(e.target.value);
         
-        if(cur_value != 0){                        
+        if(cur_value !== 0){                        
             dispatchSelectModel(e.target.value);     
             //load versions
             Vehicles.getVersion(e.target.value)
             .then(res=>{                    
                 dispatchVersion(res);                                                        
             });                                       
+        }else{
+            dispatchVersion([]);
         }
 
         //use to get formated value user friendly
         let cur_value_label = e.target.selectedOptions[0].getAttribute('data-value')        
-        setCurrentValue(cur_value_label);
-        setHasChange(true);
+        setCurrentValue(cur_value_label);        
     }    
 
     function handleClick(){        
@@ -42,15 +43,10 @@ const ModelSelectbox = ({
         }
     }
         
-    useEffect(() => {
-        
+    useEffect(() => {        
         if(SEARCH.loadModel === true){
             setCurrentValue("Carregando ...");
-        }else{          
-            if(hasChange != true){
-              setCurrentValue("Selecione");
-            }            
-        }
+        }                 
 
         let data = [];
 
@@ -60,8 +56,14 @@ const ModelSelectbox = ({
             return <option key={model.ID} data-value={model.Name} value={model.ID}>{model.Name}</option>
         }));                            
         setOptions(data);        
+
+        if(options.length > 0 && SEARCH.loadModel === false){
+            if(currentValue === "Carregando ..."){
+             setCurrentValue("Selecione");
+            }
+        }            
         
-    }, [SEARCH])
+    }, [SEARCH,currentValue,options.length])
     
     
     return (
@@ -89,3 +91,9 @@ const mapDispatchToProps = dispatch =>
 
 
 export default (connect(mapStateToProps,mapDispatchToProps))(ModelSelectbox);
+
+ModelSelectbox.propTypes = {
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,    
+    SEARCH : PropTypes.object.isRequired
+};

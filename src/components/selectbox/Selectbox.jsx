@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import className from 'classnames';
 import { FaChevronDown } from "react-icons/fa";
+import PropTypes from 'prop-types';
 
 const Selectbox = (props) => {   
 
@@ -30,3 +31,9 @@ const Selectbox = (props) => {
 
 
 export default Selectbox;
+
+Selectbox.propTypes = {
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    options : PropTypes.array.isRequired
+};

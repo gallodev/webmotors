@@ -16,16 +16,62 @@ const selectBoxObj = {
         defaultValue : 100  
     },    
     "year" : {
-        type : "year"
+        type : "year",
+        initRange : 2020,
+        endRange : 1970,
+        defaultValue : 2020
     },
     "price" : {
-        type : "price"
+        type : "price",
+        initRange : 500000,
+        endRange : 15000,
+        defaultValue : 0
     }    
 };
 
 export default function Search() {
-    const [radius,setRadius] = useState([]),          
+    const [radius,setRadius] = useState([]),    
+          [year,setYear] = useState([]),
+          [price,setPrice] = useState([]),
           [loading,setLoading] = useState(true);
+
+    function getYearOptions(){
+        const obj = selectBoxObj['year'];
+        let range = obj.initRange;        
+        let i = 1;
+        let data = [];
+
+        data.push(<option key={0} selected data-value={"Selecione"} value={0}>Selecione</option>);
+
+        for(range;range>=obj.endRange;range-=1){                                    
+
+            data.push(
+                <option key={i} data-value={range} value={range}>{range} </option>
+            )
+            i++;
+        }
+
+        return data;  
+    }
+
+    function getPriceOptions(){
+        const obj = selectBoxObj['price'];
+        let range = obj.initRange;        
+        let i = 1;
+        let data = [];
+
+        data.push(<option key={0} selected data-value={"Selecione"} value={0}>Selecione</option>);
+
+        for(range;range>=obj.endRange;range-=5000){                                    
+
+            data.push(
+                <option key={i} data-value={"R$ "+range} value={range}>{"R$ " + range} </option>
+            )
+            i++;
+        }
+        
+        return data;  
+    }
 
     function getRadiusOptions(){        
         const obj = selectBoxObj['radius'];
@@ -50,6 +96,8 @@ export default function Search() {
     
     useEffect(() => {                                
         setRadius(getRadiusOptions());    
+        setYear(getYearOptions());
+        setPrice(getPriceOptions());
         setLoading(false);                                   
     },[]);
     
@@ -90,10 +138,10 @@ export default function Search() {
                 <div className="col-xs-12">
                     <div className="form-group col-xs-6">
                         <div className="col-xs-5">
-                            <SelectBox name="year" label="Ano Desejado" defaultValue={selectBoxObj['year']['defaultValue']} />
+                            <SelectBox name="year" label="Ano Desejado" options={year} />
                         </div>
                         <div className="ml-20 col-xs-5">
-                            <SelectBox name="price" label="Faixa de preço"  defaultValue={selectBoxObj['year']['price']} />
+                            <SelectBox name="price" label="Faixa de preço" options={price} />
                         </div>
                     </div>                
                     <div className="form-group ml-20 col-xs-5">

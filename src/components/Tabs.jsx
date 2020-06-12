@@ -5,6 +5,7 @@ import SellCarButton from './SellCarButton';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Creators as applicationActions } from '../store/ducks/application';
+import PropTypes from 'prop-types';
 
 const Tabs = ({currentTab,tabs,dispatchActiveTab}) => {
         
@@ -16,7 +17,7 @@ const Tabs = ({currentTab,tabs,dispatchActiveTab}) => {
     }
 
     return (
-        <div className="box-search-header left">                            
+        <div className="box-search-header">                            
             <ul>
                 <li className={classnames("tab left",(currentTab === tabs.carIndex)?"active":"")} >
                     <a href="#car" onClick={(e)=>handleTabActive(e,tabs.carIndex)} className="tab-link left">
@@ -53,6 +54,9 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(applicationActions,dispatch)    
 
 
-
-
 export default (connect(mapStateToProps,mapDispatchToProps))(Tabs);
+
+Tabs.propTypes = {
+    currentTab: PropTypes.number.isRequired,
+    tabs: PropTypes.object.isRequired
+};

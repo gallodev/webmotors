@@ -4,6 +4,7 @@ import className from 'classnames';
 import { FaChevronDown } from "react-icons/fa";
 import { bindActionCreators } from 'redux';
 import { Creators as searchActions } from '../../store/ducks/search';
+import PropTypes from 'prop-types';
 
 const VersionSelectbox = ({
                     SEARCH,
@@ -11,22 +12,20 @@ const VersionSelectbox = ({
                     props}) => {   
 
     const [currentValue,setCurrentValue] = useState("Selecione");            
-    const [options,setOptions] = useState([]);    
-    const [hasChange,setHasChange] = useState(false);
+    const [options,setOptions] = useState([]);        
     
                 
     function handleChange(e){ 
         e.preventDefault();
         const cur_value = parseInt(e.target.value);
         
-        if(cur_value != 0){                        
+        if(cur_value !== 0){                        
             dispatchSelectVersion(e.target.value);                 
         }
 
         //use to get formated value user friendly
         let cur_value_label = e.target.selectedOptions[0].getAttribute('data-value')        
-        setCurrentValue(cur_value_label);
-        setHasChange(true);
+        setCurrentValue(cur_value_label);        
     }    
 
     function handleClick(){
@@ -39,10 +38,10 @@ const VersionSelectbox = ({
         
         if(SEARCH.loadVersion === true){
             setCurrentValue("Carregando ...");
-        }else{          
-            if(hasChange != true){
-              setCurrentValue("Selecione");
-            }            
+        }
+        
+        if(SEARCH.versions.length === 0){
+            setCurrentValue("Selecione");
         }
 
         let data = [];
@@ -53,9 +52,15 @@ const VersionSelectbox = ({
             return <option key={version.ID} data-value={version.Name} value={version.ID}>{version.Name}</option>
         }));                    
         
-        setOptions(data);        
+        setOptions(data);    
         
-    }, [SEARCH])
+        if(options.length > 0 && SEARCH.loadVersion === false){
+            if(currentValue === "Carregando ..."){
+             setCurrentValue("Selecione");
+            }
+        }            
+        
+    }, [SEARCH,currentValue,options.length])
     
     
     return (
@@ -83,3 +88,9 @@ const mapDispatchToProps = dispatch =>
 
 
 export default (connect(mapStateToProps,mapDispatchToProps))(VersionSelectbox);
+
+VersionSelectbox.propTypes = {
+    label: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,    
+    SEARCH : PropTypes.object.isRequired
+};

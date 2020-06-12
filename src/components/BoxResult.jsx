@@ -4,6 +4,7 @@ import className from 'classnames';
 import { bindActionCreators } from 'redux';
 import { Creators as searchActions } from '../store/ducks/search';
 import BoxVehicle from './BoxVehicle';
+import PropTypes from 'prop-types';
 
 function BoxResult({SEARCH,props}) {
 
@@ -12,6 +13,8 @@ function BoxResult({SEARCH,props}) {
     function mountHeader(qtdy){
       return <h1 className="box-search-title"> Encontramos {qtdy} veiculos : </h1> 
     };
+
+    
 
     useEffect(() => {        
         let data = [];
@@ -23,7 +26,7 @@ function BoxResult({SEARCH,props}) {
 
             data.push(SEARCH.vehicles.map(
             vehicle => {
-                return <BoxVehicle vehicle={vehicle} />
+                return <BoxVehicle key={vehicle.ID} vehicle={vehicle} />
             }));
 
             setContent(data);
@@ -47,3 +50,7 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators(searchActions,dispatch)  
 
 export default (connect(mapStateToProps,mapDispatchToProps))(BoxResult);
+
+BoxResult.propTypes = {
+    SEARCH: PropTypes.object.isRequired
+};
