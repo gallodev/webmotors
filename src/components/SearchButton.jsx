@@ -1,10 +1,34 @@
 import React from 'react'
 import classnames from 'classnames';
+import { bindActionCreators } from 'redux';
+import { Creators as searchActions } from '../store/ducks/search';
+import { Vehicles } from '../services';
+import { connect } from 'react-redux';
 
-export default function SearchButton(props) {
+function SearchButton({dispatchVehicle,props}) {
+
+    const page = 1
+
+    function handleSearch(){        
+        Vehicles.get(page)
+        .then(res =>{
+            dispatchVehicle(res);            
+        });
+    }
+
     return (
-        <div className={classnames("search-button",props.class)} >
+        <div className={classnames("search-button",props.class)} onClick={handleSearch} >
             <span>Ver Ofertas</span>
         </div>
     )
 }
+
+const mapStateToProps = (state , props) => ({   
+    props    
+});
+
+const mapDispatchToProps = dispatch => 
+    bindActionCreators(searchActions,dispatch)    
+
+
+export default (connect(mapStateToProps,mapDispatchToProps))(SearchButton);

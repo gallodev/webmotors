@@ -4,8 +4,7 @@ import Immutable from 'seamless-immutable';
 export const { Types , Creators } = createActions({
     dispatchSelectMark : ['selectMark'],       
     dispatchSelectModel : ['selectModel'],
-    dispatchSelectVersion : ['selectVersion'],
-    dispatchSelectVehicle : ['selectVehicle'],
+    dispatchSelectVersion : ['selectVersion'],    
     dispatchModel : ['models'],
     dispatchVersion : ['versions'],
     dispatchVehicle : ['vehicles']
@@ -17,8 +16,10 @@ const INITIAL_STATE = Immutable({
     models : [],
     selectVersion : 0,  
     versions : [],   
+    vehicles : [],
     loadVersion : false,
     loadModel : false,   
+    page : 1,
 });
 
 
@@ -42,11 +43,16 @@ const dispatchSelectVersion = (state = INITIAL_STATE , action) => {
     return state.merge({selectVersion : action.selectVersion});        
 };
 
+const dispatchVehicle = (state = INITIAL_STATE , action) => {
+    return state.merge({vehicles : action.vehicles});        
+}
+
 
 export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_SELECT_MARK] : dispatchSelectMark,    
     [Types.DISPATCH_SELECT_MODEL] : dispatchSelectModel,
     [Types.DISPATCH_SELECT_VERSION] : dispatchSelectVersion,    
     [Types.DISPATCH_MODEL] : dispatchModel,
-    [Types.DISPATCH_VERSION] : dispatchVersion,    
+    [Types.DISPATCH_VERSION] : dispatchVersion,   
+    [Types.DISPATCH_VEHICLE] : dispatchVehicle 
 })

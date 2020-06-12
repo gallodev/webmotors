@@ -2,7 +2,9 @@ import React from 'react'
 import Header from '../../components/Header';
 import Tabs from '../../components/Tabs';
 import Search from '../../components/Search';
+import BoxResult from '../../components/BoxResult';
 import { connect } from 'react-redux';
+
 import './style.css';
 
 
@@ -22,7 +24,6 @@ const Home = ({activeTab}) => {
 
     const content = get_content(activeTab);
 
-
     return (        
         <div className="main-container">                        
             <Header class="main-header flex"/>                            
@@ -33,6 +34,11 @@ const Home = ({activeTab}) => {
                         {content}
                     </div>
                 </div>
+            </section>
+            <section className="main-results flex">                
+                <div className="box-result">
+                    <BoxResult/>
+                </div>                
             </section>
         </div>
     )
