@@ -8,13 +8,16 @@ import { Vehicles } from '../services';
 
 const Selectbox = ({SEARCH,
                     dispatchSelectMark,
-                    dispatchModel,                    
+                    dispatchModel, 
+                    dispatchSelectModel,
+                    dispatchVersion,
+                    dispatchSelectVersion,                   
                     props}) => {   
 
     const [currentValue,setCurrentValue] = useState(props.obj.defaultValue);        
     let default_option = (props.options)?props.options:<option>É necessário selecionar o campo {props.obj.requiredSelected}</option>
     const [options,setOptions] = useState(default_option);   
-    let data = [];         
+    let data = [];             
                 
     function handleChange(e,obj){       
         switch(obj.type){
@@ -25,17 +28,31 @@ const Selectbox = ({SEARCH,
                 //load models
                 Vehicles.getModel(e.target.value)
                 .then(res=>{
-                    dispatchModel(res)                                        
+                    dispatchModel(res);                                        
                 });                                       
             break; 
             case "model":
-                //console.log(SEARCH);
-            break;           
+                dispatchSelectModel(e.target.value);     
+                //load versions
+                Vehicles.getVersion(e.target.value)
+                .then(res=>{
+                    alert("resolve");
+                    dispatchVersion(res);                                        
+                    console.log(res);
+                });                                       
+            break;   
+            case "version":
+                dispatchSelectVersion(e.target.value);
+            break;        
             default:
                 console.log(`Not exist type ${obj.type}`)                
             break;                
         } 
-        setCurrentValue(e.target.value);
+
+        //use to get formated value 
+        let cur_value = e.target.selectedOptions[0].getAttribute('data-value')
+        
+        setCurrentValue(cur_value);
     }    
 
     function handleClick(e,obj){
@@ -46,11 +63,18 @@ const Selectbox = ({SEARCH,
             break; 
             case "model":                             
                 data.push(SEARCH.models.map(model => {
-                    return <option key={model.ID} value={model.ID}>{model.Name}</option>
+                    return <option key={model.ID} data-value={model.Name} value={model.ID}>{model.Name}</option>
                 }));                    
                 
                 setOptions(data);                
-            break;           
+            break;
+            case "version":
+                data.push(SEARCH.versions.map(version => {
+                    return <option key={version.ID} data-value={version.Name} value={version.ID}>{version.Name}</option>
+                }));                    
+                
+                setOptions(data);                
+            break;               
             default:
                 console.log(`Not exist type ${obj.type}`)                
             break;                
@@ -63,7 +87,7 @@ const Selectbox = ({SEARCH,
             <div className={className('container-select',props.class)}>
                 <div className="custom-select-box">
                     <span className="select-label">{props.label} : {currentValue} {props.sufixLabel} </span>
-                    <select name={props.name} onClick={(e)=>{handleClick(e,props.obj)}}onChange={(e)=>handleChange(e,props.obj)}>
+                    <select name={props.name} onClick={(e)=>{handleClick(e,props.obj)}} onChange={(e)=>handleChange(e,props.obj)}>
                         {options}
                     </select>                
                     <FaChevronDown size={10} className="bottom-arrow-ico"  />            

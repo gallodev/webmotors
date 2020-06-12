@@ -19,6 +19,16 @@ const selectBoxObj = {
     "model" : {
         type : "model",
         requiredSelected : "marca"
+    },
+    "year" : {
+        type : "year"
+    },
+    "price" : {
+        type : "price"
+    },
+    "version" : {
+        type : "version",
+        requiredSelected : "modelo"
     }
 };
 
@@ -40,7 +50,7 @@ export default function Search() {
             }
 
             data.push(
-                <option key={i} selected={selectedValue} value={range}>{range} Km </option>
+                <option key={i} selected={selectedValue} data-value={range} value={range}>{range} Km </option>
             )
             i++;
         }
@@ -53,7 +63,7 @@ export default function Search() {
         const marks = await Vehicles.getMark();                                       
 
         data.push(marks.map(mark => {
-            return <option key={mark.ID} value={mark.ID}>{mark.Name}</option>
+            return <option key={mark.ID} data-value={mark.Name} value={mark.ID}>{mark.Name}</option>
         }));
         
         return data;
@@ -88,7 +98,7 @@ export default function Search() {
                             <LocationInput/>
                         </div>
                         <div className="col-xs-4">
-                           <SelectBox name="radius" label="Raio" sufixLabel="Km" options={radius} obj={selectBoxObj['radius']}/> 
+                           <SelectBox name="radius" label="Raio" options={radius} sufixLabel={" Km"} obj={selectBoxObj['radius']}/> 
                         </div>
                     </div>
                     <div className="form-group col-xs-6">
@@ -104,15 +114,15 @@ export default function Search() {
                 <div className="col-xs-12">
                     <div className="form-group col-xs-6">
                         <div className="col-xs-5">
-                            {/* <SelectBox name="model" label="Ano Desejado"/> */}
+                            <SelectBox name="year" label="Ano Desejado" obj={selectBoxObj['year']}/>
                         </div>
                         <div className="ml-20 col-xs-5">
-                            {/* <SelectBox name="model" label="Faixa de preço"/> */}
+                            <SelectBox name="price" label="Faixa de preço" obj={selectBoxObj['price']}/>
                         </div>
                     </div>                
                     <div className="form-group ml-20 col-xs-5">
                         <div className="col-xs-12">
-                            {/* <SelectBox name="model" label="Versão"/> */}
+                            <SelectBox name="version" label="Versão" obj={selectBoxObj['version']}/>
                         </div>
                     </div>
                 </div>

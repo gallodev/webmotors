@@ -16,9 +16,7 @@ const INITIAL_STATE = Immutable({
     selectedModel : 0,    
     models : [],
     selectVersion : 0,  
-    versions : [],  
-    selectVehicle : 0,
-    vehicles : []
+    versions : [],      
 });
 
 
@@ -27,7 +25,7 @@ const dispatchModel = (state = INITIAL_STATE , action) => {
 };
 
 const dispatchSelectModel = (state = INITIAL_STATE , action) => {    
-    return state;
+    return state.merge({selectedModel : parseInt(action.selectModel)});        
 }
 
 const dispatchSelectMark = (state = INITIAL_STATE , action) => {        
@@ -35,28 +33,18 @@ const dispatchSelectMark = (state = INITIAL_STATE , action) => {
 };
 
 const dispatchVersion = (state = INITIAL_STATE , action ) => {
-    return state;
+    return state.merge({versions : action.versions});        
 };
 
 const dispatchSelectVersion = (state = INITIAL_STATE , action) => {
-    return state;
-};
-
-const dispatchVehicle = (state = INITIAL_STATE , action ) => {
-    return state;
-};
-
-const dispatchSelectVehicle = (state = INITIAL_STATE , action ) => {
-    return state;
+    return state.merge({selectVersion : parseInt(action.selectVersion)});        
 };
 
 
 export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_SELECT_MARK] : dispatchSelectMark,    
     [Types.DISPATCH_SELECT_MODEL] : dispatchSelectModel,
-    [Types.DISPATCH_SELECT_VERSION] : dispatchSelectVersion,
-    [Types.DISPATCH_SELECT_VEHICLE] : dispatchSelectVehicle,
+    [Types.DISPATCH_SELECT_VERSION] : dispatchSelectVersion,    
     [Types.DISPATCH_MODEL] : dispatchModel,
-    [Types.DISPATCH_VERSION] : dispatchVersion,
-    [Types.DISPATCH_VEHICLE] : dispatchVehicle
+    [Types.DISPATCH_VERSION] : dispatchVersion,    
 })
