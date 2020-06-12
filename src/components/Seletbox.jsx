@@ -35,8 +35,7 @@ const Selectbox = ({SEARCH,
                 dispatchSelectModel(e.target.value);     
                 //load versions
                 Vehicles.getVersion(e.target.value)
-                .then(res=>{
-                    alert("resolve");
+                .then(res=>{                    
                     dispatchVersion(res);                                        
                     console.log(res);
                 });                                       

@@ -16,28 +16,30 @@ const INITIAL_STATE = Immutable({
     selectedModel : 0,    
     models : [],
     selectVersion : 0,  
-    versions : [],      
+    versions : [],   
+    loadVersion : false,
+    loadModel : false,   
 });
 
 
 const dispatchModel = (state = INITIAL_STATE , action) => {             
-    return state.merge({models : action.models})
+    return state.merge({models : action.models , loadModel : false})
 };
 
 const dispatchSelectModel = (state = INITIAL_STATE , action) => {    
-    return state.merge({selectedModel : parseInt(action.selectModel)});        
+    return state.merge({selectedModel : action.selectModel , loadVersion : true});        
 }
 
 const dispatchSelectMark = (state = INITIAL_STATE , action) => {        
-    return state.merge({selectMark : parseInt(action.selectMark)});        
+    return state.merge({selectMark : action.selectMark , loadModel : true});        
 };
 
 const dispatchVersion = (state = INITIAL_STATE , action ) => {
-    return state.merge({versions : action.versions});        
+    return state.merge({versions : action.versions , loadVersion: false});        
 };
 
 const dispatchSelectVersion = (state = INITIAL_STATE , action) => {
-    return state.merge({selectVersion : parseInt(action.selectVersion)});        
+    return state.merge({selectVersion : action.selectVersion});        
 };
 
 

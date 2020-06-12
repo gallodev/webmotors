@@ -1,10 +1,12 @@
 import React , {useEffect , useState} from 'react'
 import Checkbox from './checkbox';
 import LocationInput from './LocationInput';
-import SelectBox from './Seletbox';
+import SelectBox from './selectbox/Selectbox';
+import MarkSelect from './selectbox/MarkSelectbox';
+import ModelSelect from './selectbox/ModelSelectbox';
+import VersionSelectbox from './selectbox/VersionSelectbox';
 import ClearFilter from './ClearFilter';
 import SearchButton from './SearchButton';
-import { Vehicles } from '../services';
 
 const selectBoxObj = {
     "radius" : {
@@ -12,29 +14,17 @@ const selectBoxObj = {
         initRange : 10,
         endRange : 100,
         defaultValue : 100  
-    },
-    "mark" : {
-        type : "mark",
-    },
-    "model" : {
-        type : "model",
-        requiredSelected : "marca"
-    },
+    },    
     "year" : {
         type : "year"
     },
     "price" : {
         type : "price"
-    },
-    "version" : {
-        type : "version",
-        requiredSelected : "modelo"
-    }
+    }    
 };
 
 export default function Search() {
-    const [radius,setRadius] = useState([]),
-          [mark,setMark] = useState([]),          
+    const [radius,setRadius] = useState([]),          
           [loading,setLoading] = useState(true);
 
     function getRadiusOptions(){        
@@ -56,25 +46,11 @@ export default function Search() {
         }
 
         return data;        
-    }
-
-    async function getMarkOptions(){
-        let data = [];
-        const marks = await Vehicles.getMark();                                       
-
-        data.push(marks.map(mark => {
-            return <option key={mark.ID} data-value={mark.Name} value={mark.ID}>{mark.Name}</option>
-        }));
-        
-        return data;
-    }
+    }    
     
     useEffect(() => {                                
-        setRadius(getRadiusOptions());                        
-        getMarkOptions().then(res=> {
-            setMark(res);
-            setLoading(false);
-        });            
+        setRadius(getRadiusOptions());    
+        setLoading(false);                                   
     },[]);
     
     function getContent(){
@@ -98,15 +74,15 @@ export default function Search() {
                             <LocationInput/>
                         </div>
                         <div className="col-xs-4">
-                           <SelectBox name="radius" label="Raio" options={radius} sufixLabel={" Km"} obj={selectBoxObj['radius']}/> 
+                           <SelectBox name="radius" label="Raio" options={radius} sufixLabel={" Km"} defaultValue={selectBoxObj['radius']['defaultValue']}/> 
                         </div>
                     </div>
                     <div className="form-group col-xs-6">
                         <div className="ml-20 col-xs-5-min">
-                            <SelectBox name="mark" label="Marca" options={mark} obj={selectBoxObj['mark']} />
+                            <MarkSelect name="mark" label="Marca" />
                         </div>
                         <div className="ml-20 col-xs-5-min">
-                            <SelectBox name="model" label="Modelo" obj={selectBoxObj['model']} />
+                            <ModelSelect name="model" label="Modelo"/>
                         </div>
                     </div>
                 </div>                
@@ -114,15 +90,15 @@ export default function Search() {
                 <div className="col-xs-12">
                     <div className="form-group col-xs-6">
                         <div className="col-xs-5">
-                            <SelectBox name="year" label="Ano Desejado" obj={selectBoxObj['year']}/>
+                            <SelectBox name="year" label="Ano Desejado" defaultValue={selectBoxObj['year']['defaultValue']} />
                         </div>
                         <div className="ml-20 col-xs-5">
-                            <SelectBox name="price" label="Faixa de preço" obj={selectBoxObj['price']}/>
+                            <SelectBox name="price" label="Faixa de preço"  defaultValue={selectBoxObj['year']['price']} />
                         </div>
                     </div>                
                     <div className="form-group ml-20 col-xs-5">
                         <div className="col-xs-12">
-                            <SelectBox name="version" label="Versão" obj={selectBoxObj['version']}/>
+                            <VersionSelectbox name="version" label="Versão" />
                         </div>
                     </div>
                 </div>
