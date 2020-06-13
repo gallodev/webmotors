@@ -5,11 +5,14 @@ export const { Types , Creators } = createActions({
     dispatchSelectMark : ['selectMark'],       
     dispatchSelectModel : ['selectModel'],
     dispatchSelectVersion : ['selectVersion'],    
-    dispatchCheckCategory : ['category'],
+    dispatchSelectYear : ['year'],
+    dispatchSelectPrice : ['price'],
+    dispatchSelectRadius : ['radius'],
+    dispatchCheckCategory : ['category'],    
     dispatchLocation : ['location'],
     dispatchModel : ['models'],
     dispatchVersion : ['versions'],
-    dispatchVehicle : ['vehicles'],
+    dispatchVehicle : ['vehicles'],    
     dispatchClear : []
 });
 
@@ -24,8 +27,12 @@ const INITIAL_STATE = Immutable({
         isUsed : false
     },
     location : "",    
-    vehicles : [],        
+    vehicles : [],      
+    selectYear : "",
+    selectPrice : "", 
+    selectRadius : "",
     loadVersion : false,
+    hasCleared : false,
     loadModel : false,   
     page : 1,
 });
@@ -68,18 +75,35 @@ const dispatchLocation = (state = INITIAL_STATE , action) => {
     return state.merge({location : action.location});        
 }
 
-const dispatchClear = (state = INITIAL_STATE , action) => {
-    return state.merge(state = INITIAL_STATE);            
+const dispatchClear = (state = INITIAL_STATE , action) => {                
+    return state.merge(state = INITIAL_STATE);                 
 }
+
+const dispatchSelectPrice = (state = INITIAL_STATE , action) => {
+    return state.merge({selectPrice : action.price});        
+}
+
+const dispatchSelectYear = (state = INITIAL_STATE , action) => {
+    return state.merge({selectYear : action.year});        
+}
+
+const dispatchSelectRadius = (state = INITIAL_STATE , action) => {
+    return state.merge({selectRadius : action.radius});        
+}
+
 
 export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_SELECT_MARK] : dispatchSelectMark,    
     [Types.DISPATCH_SELECT_MODEL] : dispatchSelectModel,
     [Types.DISPATCH_SELECT_VERSION] : dispatchSelectVersion,    
+    [Types.DISPATCH_SELECT_PRICE] : dispatchSelectPrice,
+    [Types.DISPATCH_SELECT_YEAR] : dispatchSelectYear,
+    [Types.DISPATCH_SELECT_RADIUS] : dispatchSelectRadius,
     [Types.DISPATCH_MODEL] : dispatchModel,
     [Types.DISPATCH_VERSION] : dispatchVersion,   
     [Types.DISPATCH_VEHICLE] : dispatchVehicle,
     [Types.DISPATCH_CHECK_CATEGORY] : dispatchCheckCategory,
     [Types.DISPATCH_LOCATION] : dispatchLocation,
-    [Types.DISPATCH_CLEAR] : dispatchClear
+    [Types.DISPATCH_CLEAR] : dispatchClear    
+    
 })

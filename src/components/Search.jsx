@@ -40,14 +40,15 @@ export default function Search() {
         let range = obj.initRange;        
         let i = 1;
         let data = [];
-
-        data.push(<option key={0} selected data-value={"Selecione"} value={0}>Selecione</option>);
-
+        
         for(range;range>=obj.endRange;range-=1){                                    
 
-            data.push(
-                <option key={i} data-value={range} value={range}>{range} </option>
-            )
+            data.push({
+                key : i,
+                dataValue : range,
+                value : range        
+            });
+
             i++;
         }
 
@@ -60,13 +61,14 @@ export default function Search() {
         let i = 1;
         let data = [];
 
-        data.push(<option key={0} selected data-value={"Selecione"} value={0}>Selecione</option>);
+        for(range;range>=obj.endRange;range-=5000){         
 
-        for(range;range>=obj.endRange;range-=5000){                                    
+            data.push({
+                    key : i,
+                    dataValue : "R$ "+range,
+                    value : range        
+                });
 
-            data.push(
-                <option key={i} data-value={"R$ "+range} value={range}>{"R$ " + range} </option>
-            )
             i++;
         }
         
@@ -85,9 +87,12 @@ export default function Search() {
                 selectedValue = true;
             }
 
-            data.push(
-                <option key={i} selected={selectedValue} data-value={range} value={range}>{range} Km </option>
-            )
+            data.push({
+                    key : i,
+                    dataValue : range,
+                    value : range        
+            });
+
             i++;
         }
 
@@ -107,12 +112,12 @@ export default function Search() {
         }else{
             return (
               <div className="search-content left col-xs-12">            
-                <div className="col-xs-12">
+                <div className="col-xs-12">                    
                     <div>
-                        <Checkbox name="new" label="Novos"/>
+                        <Checkbox name="new" selectStore={"isNew"} label="Novos"/>
                     </div>
                     <div>
-                        <Checkbox name="used" label="Usados"/>
+                        <Checkbox name="used" selectStore={"isUsed"} label="Usados"/>
                     </div>                
                 </div>
                 <div className="row mb-20 mb-margin"/>
@@ -122,7 +127,7 @@ export default function Search() {
                             <LocationInput/>
                         </div>
                         <div className="col-xs-4">
-                           <SelectBox name="radius" label="Raio" options={radius} sufixLabel={" Km"} defaultValue={selectBoxObj['radius']['defaultValue']}/> 
+                           <SelectBox name="radius" label="Raio" options={radius} selectStore={"selectRadius"} sufixLabel={" Km"} defaultValue={selectBoxObj['radius']['defaultValue']}/> 
                         </div>
                     </div>
                     <div className="form-group col-xs-6">
@@ -138,10 +143,10 @@ export default function Search() {
                 <div className="col-xs-12">
                     <div className="form-group col-xs-6">
                         <div className="col-xs-5">
-                            <SelectBox name="year" label="Ano Desejado" options={year} />
+                            <SelectBox name="year" label="Ano Desejado" selectStore={"selectYear"} options={year} />
                         </div>
                         <div className="ml-20 col-xs-5">
-                            <SelectBox name="price" label="Faixa de preço" options={price} />
+                            <SelectBox name="price" label="Faixa de preço" selectStore={"selectPrice"} options={price} />
                         </div>
                     </div>                
                     <div className="form-group ml-20 col-xs-5">

@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 function ClearFilter({dispatchClear,props}) {
 
     function handleClick(){
-        dispatchClear();
+        dispatchClear();        
     }
 
     return (

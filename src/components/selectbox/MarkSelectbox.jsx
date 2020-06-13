@@ -73,7 +73,7 @@ const MarkSelectBox = ({
             <div className={className('container-select',props.class)}>
                 <div className="custom-select-box">
                     <span className="select-label">{props.label} : {currentValue} </span>
-                    <select name={props.name} onChange={(e)=>handleChange(e)}>
+                    <select value={0} name={props.name}  onChange={(e)=>handleChange(e)}>
                         {options}
                     </select>                
                     <FaChevronDown size={10} className="bottom-arrow-ico"  />            
