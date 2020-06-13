@@ -44,6 +44,9 @@ const ModelSelectbox = ({
     }
         
     useEffect(() => {        
+        if(SEARCH.models.length === 0){
+            setCurrentValue("Selecione");
+        }
         if(SEARCH.loadModel === true){
             setCurrentValue("Carregando ...");
         }                 

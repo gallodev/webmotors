@@ -9,7 +9,8 @@ export const { Types , Creators } = createActions({
     dispatchLocation : ['location'],
     dispatchModel : ['models'],
     dispatchVersion : ['versions'],
-    dispatchVehicle : ['vehicles']
+    dispatchVehicle : ['vehicles'],
+    dispatchClear : []
 });
 
 const INITIAL_STATE = Immutable({        
@@ -22,8 +23,8 @@ const INITIAL_STATE = Immutable({
         isNew : false,
         isUsed : false
     },
-    location : "",
-    vehicles : [],
+    location : "",    
+    vehicles : [],        
     loadVersion : false,
     loadModel : false,   
     page : 1,
@@ -67,6 +68,10 @@ const dispatchLocation = (state = INITIAL_STATE , action) => {
     return state.merge({location : action.location});        
 }
 
+const dispatchClear = (state = INITIAL_STATE , action) => {
+    return state.merge(state = INITIAL_STATE);            
+}
+
 export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_SELECT_MARK] : dispatchSelectMark,    
     [Types.DISPATCH_SELECT_MODEL] : dispatchSelectModel,
@@ -75,5 +80,6 @@ export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_VERSION] : dispatchVersion,   
     [Types.DISPATCH_VEHICLE] : dispatchVehicle,
     [Types.DISPATCH_CHECK_CATEGORY] : dispatchCheckCategory,
-    [Types.DISPATCH_LOCATION] : dispatchLocation
+    [Types.DISPATCH_LOCATION] : dispatchLocation,
+    [Types.DISPATCH_CLEAR] : dispatchClear
 })
