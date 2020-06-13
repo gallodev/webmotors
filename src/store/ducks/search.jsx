@@ -5,6 +5,8 @@ export const { Types , Creators } = createActions({
     dispatchSelectMark : ['selectMark'],       
     dispatchSelectModel : ['selectModel'],
     dispatchSelectVersion : ['selectVersion'],    
+    dispatchCheckCategory : ['category'],
+    dispatchLocation : ['location'],
     dispatchModel : ['models'],
     dispatchVersion : ['versions'],
     dispatchVehicle : ['vehicles']
@@ -16,6 +18,11 @@ const INITIAL_STATE = Immutable({
     models : [],
     selectVersion : 0,  
     versions : [],   
+    category : {
+        isNew : false,
+        isUsed : false
+    },
+    location : "",
     vehicles : [],
     loadVersion : false,
     loadModel : false,   
@@ -47,6 +54,18 @@ const dispatchVehicle = (state = INITIAL_STATE , action) => {
     return state.merge({vehicles : action.vehicles});        
 }
 
+const dispatchCheckCategory = (state = INITIAL_STATE , action) => {
+    // used if because was two categorys    
+    if(action.category.name === "new"){
+        return state.merge({category: {isUsed : state.category.isUsed , isNew : action.category.value}});        
+    }else{
+        return state.merge({category: {isUsed : action.category.value , isNew: state.category.isNew}});        
+    }
+}
+
+const dispatchLocation = (state = INITIAL_STATE , action) => {
+    return state.merge({location : action.location});        
+}
 
 export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_SELECT_MARK] : dispatchSelectMark,    
@@ -54,5 +73,7 @@ export default createReducer(INITIAL_STATE,{
     [Types.DISPATCH_SELECT_VERSION] : dispatchSelectVersion,    
     [Types.DISPATCH_MODEL] : dispatchModel,
     [Types.DISPATCH_VERSION] : dispatchVersion,   
-    [Types.DISPATCH_VEHICLE] : dispatchVehicle 
+    [Types.DISPATCH_VEHICLE] : dispatchVehicle,
+    [Types.DISPATCH_CHECK_CATEGORY] : dispatchCheckCategory,
+    [Types.DISPATCH_LOCATION] : dispatchLocation
 })

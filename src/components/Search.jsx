@@ -109,10 +109,10 @@ export default function Search() {
               <div className="search-content left col-xs-12">            
                 <div className="col-xs-12">
                     <div>
-                        <Checkbox attr={{name:"new",label:"Novos"}} />
+                        <Checkbox name="new" label="Novos"/>
                     </div>
                     <div>
-                        <Checkbox attr={{name:"used",label:"Usados"}} />
+                        <Checkbox name="used" label="Usados"/>
                     </div>                
                 </div>
                 <div className="row mb-20 mb-margin"/>

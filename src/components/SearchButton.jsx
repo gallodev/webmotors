@@ -5,7 +5,7 @@ import { Creators as searchActions } from '../store/ducks/search';
 import { Vehicles } from '../services';
 import { connect } from 'react-redux';
 
-function SearchButton({dispatchVehicle,props}) {
+function SearchButton({SEARCH,dispatchVehicle,props}) {
 
     const page = 1
 
@@ -14,6 +14,7 @@ function SearchButton({dispatchVehicle,props}) {
         .then(res =>{
             dispatchVehicle(res);            
         });
+        console.log(SEARCH);
     }
 
     return (
@@ -24,6 +25,7 @@ function SearchButton({dispatchVehicle,props}) {
 }
 
 const mapStateToProps = (state , props) => ({   
+    SEARCH : state.search,
     props    
 });
 
