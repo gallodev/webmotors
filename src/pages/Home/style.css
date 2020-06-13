@@ -212,6 +212,31 @@
     font-weight: bold;
 }
 
+.pagination{
+    clear: both;    
+    margin-top: 50px;
+    float: right;
+}    
+.pagination ul{
+    flex: 1;
+    display: flex;    
+    justify-content : right;        
+    margin-right: 55px;
+}
+
+.pagination ul li{    
+    margin: 0 10px 0 10px;
+}
+.pagination ul li a{
+    width: auto;
+    color: var(--main-white-color);
+    background: var(--highlight-red-color);
+    padding: 20px;        
+}
+.pagination ul li:last-child{
+    margin-right: 0;
+}
+
 
 @media screen and (min-width: 768px) and (max-width:935px) {        
     .main-container .main-results .box-result .box-vehicle{
