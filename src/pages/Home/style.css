@@ -251,6 +251,7 @@
     .main-container .search-container .box-search-content{
         width: 100%;
         height: auto;        
+        float: left;
     }
     
     .main-container .search-container .box-search-content .search-content .form-group{
@@ -271,8 +272,11 @@
 }
 
 @media screen and (max-width: 768px) {    
+    .pagination ul{
+        margin-right: 44px;
+    }
     .main-container .main-results .box-result .box-vehicle{
-        margin: 5px;
+        margin: 20px 30px;
     }
     .main-container .search-container .box-search-content .search-content .container-location-input input{
         border-right: 1px solid var(--main-gray-color);
